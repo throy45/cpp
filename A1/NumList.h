@@ -1,5 +1,5 @@
-#ifndef FOO_H
-#define FOO_H
+#ifndef NUMLIST_H
+#define NUMLIST_H
 
 #include <iostream>
 
@@ -11,17 +11,17 @@ class NumList
     void expand();
 
 public:
-    NumList();
-    NumList(const NumList &other);
+    NumList();                     // = delete if we wanted to prevent empty instances
+    NumList(const NumList &other); // pass by reference to prevent copying
     NumList(NumList &&other);
     NumList &operator=(const NumList &other);
     NumList &operator=(NumList &&other);
-    ~NumList();
+    virtual ~NumList();
     bool empty() const;
     bool full() const;
     int size() const;
     int getCapacity() const;
-    bool contains(int num) const;
+    bool contains(int num) const; // const functions are not allowed to change member variables
     void append(int num);
     void print(std::ostream &sout) const;
     int get(int index) const;

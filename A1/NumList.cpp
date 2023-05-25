@@ -1,5 +1,4 @@
 #include "NumList.h"
-#include <iostream>
 
 NumList::NumList() : pArray{new int{}}, mcapacity{1}, msize{0} {};
 NumList::NumList(const NumList &other) : msize{other.msize}, mcapacity{other.mcapacity}, pArray{new int[other.mcapacity]} {};
@@ -12,8 +11,8 @@ NumList::NumList(NumList &&other)
 };
 NumList &NumList::operator=(const NumList &other)
 {
-    if (this == &other)
-        return *this;
+    if (this == &other) // if the address of the current object is the same as the address of the other object
+        return *this;   // where & is address and not reference in that context
     delete[] this->pArray;
     int len = other.getCapacity();
     this->pArray = new int[len];
@@ -54,7 +53,7 @@ void NumList::expand()
 
 bool NumList::empty() const
 {
-    return msize == 0;
+    return msize == 0; // return msize==0 ? true : false;
 };
 bool NumList::full() const
 {
@@ -92,12 +91,12 @@ void NumList::print(std::ostream &sout) const
 {
     for (int k = 0; k < msize; ++k)
     {
-        sout << pArray[k] << ", ";
+        sout << pArray[k] << ", "; // same as *(pArray+k)
     }
 };
 int NumList::get(int index) const
 {
-    if (index > msize)
+    if (index >= msize)
     {
         throw std::out_of_range("Index out of range");
     }
@@ -105,7 +104,7 @@ int NumList::get(int index) const
 };
 bool NumList::get(int index, int &value) const
 {
-    if (index > msize)
+    if (index >= msize)
     {
         return false;
     }
