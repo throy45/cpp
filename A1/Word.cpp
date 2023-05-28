@@ -74,7 +74,7 @@ void Word::print(std::ostream &sout) const
         sout << "(0)";
         return;
     }
-    sout << pCharArray << "  (" << frequency << ") ";
+    sout << std::setw(15) << pCharArray << "  (" << frequency << ") ";
     num_list.print(sout);
 };
 

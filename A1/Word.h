@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <iomanip>
 #include "NumList.h"
 
 class Word // delimited by space or \t

@@ -15,30 +15,29 @@ size_t Dictionary::bucketIndex(const string &word) const
 
 Dictionary::Dictionary(const string &filename) : filename(filename)
 {
-    std::ifstream fin;
-    fin.open(filename); // create an input file stream
-    if (!fin)
+    std::ifstream inputFile(filename);
+    // inputFile.open(filename); // create an input file stream
+    if (!inputFile.is_open())
     {
-        cout << "could not open input file: " << filename << endl;
-        exit(1);
+        throw std::runtime_error("Could not open input file: " + filename);
     }
     int linenum = 0;
     string line;
-    getline(fin, line); // very important first attempt to read;
+    getline(inputFile, line); // very important first attempt to read;
     // this first attempt will get the i/o flags initialized
-    while (fin)
+    while (inputFile)
     {
         // cout << line << endl;
-        ++linenum;               // count the line
-        istringstream sin(line); // turn the line into an input string stream
+        ++linenum;                                  // count the line
+        std::istringstream inputStringStream(line); // turn the line into an input string stream
         string wordStr;
-        while (sin >> wordStr) // extract word strings
+        while (inputStringStream >> wordStr) // extract word strings
         {
             processWord(wordStr, linenum);
         }
-        getline(fin, line); // attempt to read the next line, if any
+        getline(inputFile, line); // attempt to read the next line, if any
     }
-    fin.close();
+    inputFile.close();
 }
 
 void Dictionary::processWord(const string &word, int linenum)
@@ -49,9 +48,11 @@ void Dictionary::processWord(const string &word, int linenum)
 
 void Dictionary::print(ostream &sout) const
 {
+    sout << "=======================" << endl;
+    string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for (size_t i = 0; i < 27; ++i)
     {
-        sout << "bucket " << i << ": ";
+        sout << "<" << letters[i] << ">" << endl;
         wordListBuckets[i].print(sout);
         sout << endl;
     }
