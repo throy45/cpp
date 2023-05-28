@@ -5,9 +5,9 @@
 using std::cout;
 using std::endl;
 
-int main()
+void testNumList()
 {
-    std::cout << "Tesing NumList!\n";
+    std::cout << "Testing NumList!\n";
     NumList list{};
     cout << "list-1 -> " << list << endl;
     assert(list.getCapacity() == 1);
@@ -45,5 +45,4 @@ int main()
     }
     assert(!list.get(list.size(), value));
     cout << "NumList Test Successful" << endl;
-    return 0;
 }

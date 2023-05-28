@@ -2,21 +2,22 @@
 #define WORD_H
 
 #include <iostream>
+#include <cstring>
 #include "NumList.h"
 
-class Word
+class Word // delimited by space or \t
 {
-    int *pCharArray;
+    char *pCharArray; // a pointer to an array of characters, c-string
     int frequency;
-    NumList num_list;
+    NumList num_list; // list of line numbers
 
 public:
-    Word(const char pChArray[], int n);
-    Word();
-    Word(const Word &other);
-    Word(Word &&other);
-    Word &operator=(const Word &other);
-    Word &operator=(Word &&other);
+    Word(const char *pChArr, int n);
+    Word() = delete; // no default ctor
+    Word(const Word &word);
+    Word(Word &&word);
+    Word &operator=(const Word &rhs);
+    Word &operator=(Word &&rhs);
     virtual ~Word();
     const char *c_str() const;
     void appendNumber(int n);
@@ -24,6 +25,7 @@ public:
     void print(std::ostream &sout) const;
     const NumList &getNumberList() const;
     int compare(const Word &other) const;
+    friend std::ostream &operator<<(std::ostream &sout, const Word &word);
 };
 
 #endif
