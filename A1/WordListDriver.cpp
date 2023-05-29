@@ -4,6 +4,10 @@
 using std::cout;
 using std::endl;
 
+/**
+ * The function creates a WordList object, adds several Word objects to it, and then prints the
+ * contents of the WordList.
+ */
 void testWordList()
 {
     WordList bucket;

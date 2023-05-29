@@ -5,6 +5,10 @@
 using std::cout;
 using std::endl;
 
+/**
+ * The function tests the functionality of a NumList class by appending values and checking the size
+ * and capacity of the list.
+ */
 void testNumList()
 {
     std::cout << "Testing NumList!\n";

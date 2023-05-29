@@ -5,12 +5,25 @@
 using std::cout;
 using std::endl;
 
+/**
+ * The function "makeWord" creates and returns a Word object with a given word and number.
+ *
+ * @param word A pointer to a constant character array representing the word to be stored in the Word
+ * object.
+ * @param number The parameter "number" is an integer that represents the numerical value associated
+ * with a given word.
+ * @return A temporary object of type `Word`.
+ */
 Word makeWord(const char *word, int number)
 {
     Word w1{word, number};
     return w1; // return a temporary
 }
 
+/**
+ * The function tests objects of class Word by performing various operations such as move/copy
+ * constructors/assignments, appending numbers, and retrieving number lists and character strings.
+ */
 void testWord()
 {
     std::cout << "Testing Objects of Class Word\n";

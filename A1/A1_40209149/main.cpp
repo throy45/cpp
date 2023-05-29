@@ -6,10 +6,6 @@ using std::cin;
 using std::cout;
 using std::string;
 
-void testNumList();
-void testWord();
-void testWordList();
-
 /**
  * The main function reads in a filename, creates a dictionary object from the file, and prints the
  * dictionary.
@@ -19,9 +15,6 @@ void testWordList();
  */
 int main()
 {
-    // testNumList();
-    // testWord();
-    // testWordList();
 
     cout << "Enter the name of input text file: ";
     string filename;
