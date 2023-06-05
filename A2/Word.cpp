@@ -1,6 +1,6 @@
 #include "Word.h"
 
-Word::Word(string textIn, size_t line_number) : frequency{1}, text{textIn}
+Word::Word(string textIn, size_t line_number) : text{textIn}, frequency{1}
 {
     line_number_vec.push_back(line_number);
 };

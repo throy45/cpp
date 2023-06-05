@@ -123,58 +123,121 @@ void Dictionary::print_buckets_sorted_on_word_text(const set<char> &charSet) con
     {
         for (auto &bucket : wordListBuckets)
         {
-            list<Word> sortedBucket(bucket);
+            forward_list<Word> sortedBucket;
+            for (auto &word : bucket)
+            {
+                sortedBucket.push_front(word);
+            }
             sortedBucket.sort();
             for (auto &word : sortedBucket)
             {
-                std::cout << word << '\n';
+                std::cout << word << std::endl;
             }
         }
         return;
     }
     for (auto &bucket : wordListBuckets)
     {
-        if (charSet.find(bucket.front().get_text()[0]) != charSet.end())
+        if (bucket.size() == 0)
         {
-            list<Word> sortedBucket(bucket);
+            continue;
+        }
+        if (charSet.find(bucket.front().get_word_text()[0]) != charSet.end())
+        {
+            forward_list<Word> sortedBucket;
+            for (auto &word : bucket)
+            {
+                sortedBucket.push_front(word);
+            }
             sortedBucket.sort();
             for (auto &word : sortedBucket)
             {
-                std::cout << word << '\n';
+                std::cout << word << std::endl;
             }
         }
     }
 }
 
+// option 4
 void Dictionary::print_buckets_sorted_on_word_frequency(const set<char> &charSet) const
 {
-    for (auto &bucket : wordListBuckets)
+    if (charSet.empty())
     {
-        if (charSet.find(bucket.front().get_text()[0]) != charSet.end())
+        for (auto &bucket : wordListBuckets)
         {
-            list<Word> sortedBucket(bucket);
-            sortedBucket.sort([](const Word &a, const Word &b)
-                              { return a.get_frequency() > b.get_frequency(); });
+            forward_list<Word> sortedBucket;
+            for (auto &word : bucket)
+            {
+                sortedBucket.push_front(word);
+            }
+            sortedBucket.sort(isLessFrequent);
             for (auto &word : sortedBucket)
             {
-                std::cout << word << '\n';
+                std::cout << word << std::endl;
+            }
+        }
+        return;
+    }
+    for (auto &bucket : wordListBuckets)
+    {
+        if (bucket.size() == 0)
+        {
+            continue;
+        }
+        if (charSet.find(bucket.front().get_word_text()[0]) != charSet.end())
+        {
+            forward_list<Word> sortedBucket;
+            for (auto &word : bucket)
+            {
+                sortedBucket.push_front(word);
+            }
+            sortedBucket.sort(isLessFrequent);
+            for (auto &word : sortedBucket)
+            {
+                std::cout << word << std::endl;
             }
         }
     }
 }
 
+// option 5
 void Dictionary::print_buckets_sorted_on_word_length(const set<char> &charSet) const
 {
-    for (auto &bucket : wordListBuckets)
+    if (charSet.empty())
     {
-        if (charSet.find(bucket.front().get_text()[0]) != charSet.end())
+        for (auto &bucket : wordListBuckets)
         {
-            list<Word> sortedBucket(bucket);
-            sortedBucket.sort([](const Word &a, const Word &b)
-                              { return a.get_text().length() > b.get_text().length(); });
+            forward_list<Word> sortedBucket;
+            for (auto &word : bucket)
+            {
+                sortedBucket.push_front(word);
+            }
+            sortedBucket.sort(isShorter);
+            std::cout << "<" << bucket.front().get_word_text().size() << ">";
             for (auto &word : sortedBucket)
             {
-                std::cout << word << '\n';
+                std::cout << std::setw(15) << word << std::endl; // TODO:: fix printing width
+            }
+        }
+        return;
+    }
+    for (auto &bucket : wordListBuckets)
+    {
+        if (bucket.size() == 0)
+        {
+            continue;
+        }
+        if (charSet.find(bucket.front().get_word_text()[0]) != charSet.end())
+        {
+            forward_list<Word> sortedBucket;
+            for (auto &word : bucket)
+            {
+                sortedBucket.push_front(word);
+            }
+            sortedBucket.sort(isShorter);
+            for (auto &word : sortedBucket)
+            {
+                std::cout << word << std::endl;
             }
         }
     }

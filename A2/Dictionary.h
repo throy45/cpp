@@ -44,5 +44,7 @@ public:
     void print_buckets_sorted_on_word_text(const set<char> &charSet) const;
     void print_buckets_sorted_on_word_frequency(const set<char> &charSet) const;
     void print_buckets_sorted_on_word_length(const set<char> &charSet) const;
+    string get_filename() const { return filename; }
+    string get_delimiters() const { return theDelimiters; }
 };
 #endif
