@@ -9,6 +9,7 @@
 #include <vector>
 #include <set>
 #include <forward_list>
+#include <iomanip>
 
 #include "Word.h"
 
