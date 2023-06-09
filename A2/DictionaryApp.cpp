@@ -3,6 +3,8 @@
 #include <string>
 #include "Dictionary.h"
 
+// . ;?()= "-,13579
+
 Dictionary initialize_dict();
 int main_menu();
 std::set<size_t> get_input_sizet_set();
@@ -216,19 +218,19 @@ std::set<char> get_input_char_set()
 
     std::string input;
     std::getline(std::cin, input);
-    bool special_char = false;
+    bool specials = false;
     for (char c : input)
     {
-        if (std::isalpha(c) && !result.contains(std::tolower(c)) && !result.contains(std::toupper(c)))
+        if (std::isalpha(c) && !result.contains(static_cast<char>(std::tolower(c))) && !result.contains(static_cast<char>(std::toupper(c))))
         {
             result.insert(c);
         }
         else if (!std::isspace(c) && !std::isalpha(c))
         {
-            special_char = true;
+            specials = true;
         }
     }
-    if (special_char)
+    if (specials)
     {
         result.insert('!');
     }

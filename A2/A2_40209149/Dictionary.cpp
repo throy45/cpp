@@ -179,7 +179,7 @@ void Dictionary::print_original_buckets(const set<char> &charSet) const
             if (letter != '!')
             {
                 std::cout << "<" << letter << ">" << std::endl;
-                char c = toupper(letter);
+                char c = static_cast<char>(toupper(letter));
                 for (auto &word : word_list_buckets[c - 'A'])
                 {
                     std::cout << std::setw(15) << word << '\n';
@@ -236,7 +236,7 @@ void Dictionary::print_buckets_sorted_on_word_text(const set<char> &charSet) con
             if (letter != '!')
             {
                 std::cout << "<" << letter << ">" << std::endl;
-                char c = toupper(letter);
+                char c = static_cast<char>(toupper(letter));
                 forward_list<Word> sorted_bucket;
                 for (auto &word : word_list_buckets[c - 'A'])
                 {
@@ -305,7 +305,7 @@ void Dictionary::print_buckets_sorted_on_word_frequency(const set<char> &charSet
             if (letter != '!')
             {
                 std::cout << "<" << letter << ">" << std::endl;
-                char c = toupper(letter);
+                char c = static_cast<char>(toupper(letter));
                 forward_list<Word> sorted_bucket;
                 for (auto &word : word_list_buckets[c - 'A'])
                 {
@@ -373,7 +373,7 @@ void Dictionary::print_buckets_sorted_on_word_length(const set<char> &charSet) c
             if (letter != '!')
             {
                 std::cout << "<" << letter << ">" << std::endl;
-                char c = toupper(letter);
+                char c = static_cast<char>(toupper(letter));
                 forward_list<Word> sorted_bucket;
                 for (auto &word : word_list_buckets[c - 'A'])
                 {

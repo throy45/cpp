@@ -35,13 +35,13 @@ vector<string> Dictionary::extract_words_from_line(const string &line) const
     size_t start = line.find_first_not_of(delimiters);
     while (start != string::npos)
     {
-        size_t end = line.find_first_of(delimiters, start + 1); // find delimiter
-        if (end == string::npos)                                // if no delimiter found, set end to end of line
+        size_t end = line.find_first_of(delimiters, start + 1);
+        if (end == string::npos)
         {
             end = line.length();
         }
-        words.push_back(line.substr(start, end - start));    // extract word
-        start = line.find_first_not_of(delimiters, end + 1); // find next word
+        words.push_back(line.substr(start, end - start));
+        start = line.find_first_not_of(delimiters, end + 1);
     }
     return words;
 }
@@ -164,7 +164,7 @@ void Dictionary::print_original_buckets(const set<char> &charSet) const
         size_t i = 0;
         for (auto &bucket : word_list_buckets)
         {
-            std::cout << "<" << letters[i] << ">" << std::endl; // will also print special characters
+            std::cout << "<" << letters[i] << ">" << std::endl;
             ++i;
             for (auto &word : bucket)
             {
@@ -179,14 +179,14 @@ void Dictionary::print_original_buckets(const set<char> &charSet) const
             if (letter != '!')
             {
                 std::cout << "<" << letter << ">" << std::endl;
-                char c = toupper(letter);
+                char c = static_cast<char>(toupper(letter));
                 for (auto &word : word_list_buckets[c - 'A'])
                 {
                     std::cout << std::setw(15) << word << '\n';
                 }
             }
         }
-        if (charSet.contains('!')) // print special characters
+        if (charSet.contains('!'))
         {
             std::cout << "<>" << std::endl;
             for (auto &word : word_list_buckets[26])
@@ -236,7 +236,7 @@ void Dictionary::print_buckets_sorted_on_word_text(const set<char> &charSet) con
             if (letter != '!')
             {
                 std::cout << "<" << letter << ">" << std::endl;
-                char c = toupper(letter);
+                char c = static_cast<char>(toupper(letter));
                 forward_list<Word> sorted_bucket;
                 for (auto &word : word_list_buckets[c - 'A'])
                 {
@@ -249,7 +249,7 @@ void Dictionary::print_buckets_sorted_on_word_text(const set<char> &charSet) con
                 }
             }
         }
-        if (charSet.contains('!')) // print special characters
+        if (charSet.contains('!'))
         {
             std::cout << "<>" << std::endl;
             forward_list<Word> sorted_bucket;
@@ -305,7 +305,7 @@ void Dictionary::print_buckets_sorted_on_word_frequency(const set<char> &charSet
             if (letter != '!')
             {
                 std::cout << "<" << letter << ">" << std::endl;
-                char c = toupper(letter);
+                char c = static_cast<char>(toupper(letter));
                 forward_list<Word> sorted_bucket;
                 for (auto &word : word_list_buckets[c - 'A'])
                 {
@@ -318,7 +318,7 @@ void Dictionary::print_buckets_sorted_on_word_frequency(const set<char> &charSet
                 }
             }
         }
-        if (charSet.contains('!')) // print special characters
+        if (charSet.contains('!'))
         {
             std::cout << "<>" << std::endl;
             forward_list<Word> sorted_bucket;
@@ -373,7 +373,7 @@ void Dictionary::print_buckets_sorted_on_word_length(const set<char> &charSet) c
             if (letter != '!')
             {
                 std::cout << "<" << letter << ">" << std::endl;
-                char c = toupper(letter);
+                char c = static_cast<char>(toupper(letter));
                 forward_list<Word> sorted_bucket;
                 for (auto &word : word_list_buckets[c - 'A'])
                 {
@@ -386,7 +386,7 @@ void Dictionary::print_buckets_sorted_on_word_length(const set<char> &charSet) c
                 }
             }
         }
-        if (charSet.contains('!')) // print special characters
+        if (charSet.contains('!'))
         {
             std::cout << "<>" << std::endl;
             forward_list<Word> sorted_bucket;
