@@ -152,7 +152,7 @@ bool is_shorter(const Word &lhs, const Word &rhs)
 {
     if (lhs.length() == rhs.length())
     {
-        return lhs < rhs; // if the lengths are equal, return the result of the < operator
+        return lhs < rhs;
     }
     return lhs.length() < rhs.length();
 };
@@ -172,7 +172,7 @@ bool is_less_frequent(const Word &lhs, const Word &rhs)
 {
     if (lhs.get_frequency() == rhs.get_frequency())
     {
-        return lhs < rhs; // if the frequencies are equal, return the result of the < operator
+        return lhs < rhs;
     }
     return lhs.get_frequency() < rhs.get_frequency();
 };
