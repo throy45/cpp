@@ -3,7 +3,7 @@
 #include "Dictionary.h"
 #include "Word.h"
 
-void printWordList(const std::list<Word> &wordList)
+void print_word_list(const std::list<Word> &wordList)
 {
     for (auto &word : wordList)
     {
@@ -11,7 +11,7 @@ void printWordList(const std::list<Word> &wordList)
     }
 }
 
-void testSortingByWordText()
+void test_sorting_by_word_text()
 {
     // Create a list of Word objects with different word texts
     Word cherry("cherry", 3);
@@ -26,14 +26,14 @@ void testSortingByWordText()
     words.sort();
 
     std::cout << "\nSorted:\n";
-    printWordList(words);
+    print_word_list(words);
 
     // Verify that the list is sorted correctly
     assert(words.front().get_word_text() == "apple");
     assert(words.back().get_word_text() == "cherry");
 }
 
-void testSortingByWordFrequency()
+void test_sorting_by_word_frequency()
 {
     // Create a list of Word objects with different frequencies
     Word cherry("cherry", 3);
@@ -45,17 +45,17 @@ void testSortingByWordFrequency()
     std::list<Word> words = {cherry, apple, banana};
 
     // Sort the list based on word frequency
-    words.sort(isLessFrequent);
+    words.sort(is_less_frequent);
 
     std::cout << "\nSorted by frequency:\n";
-    printWordList(words);
+    print_word_list(words);
 
     // Verify that the list is sorted correctly
     assert(words.front().get_frequency() == 1);
     assert(words.back().get_frequency() == 3);
 }
 
-void testSortingByWordLength()
+void test_sorting_by_word_length()
 {
     // Create a list of Word objects with different word lengths
     Word cherry("cherry", 3);
@@ -67,17 +67,17 @@ void testSortingByWordLength()
     std::list<Word> words = {cherry, apple, banana};
 
     // Sort the list based on word length
-    words.sort(isShorter);
+    words.sort(is_shorter);
 
     std::cout << "\nSorted by length:\n";
-    printWordList(words);
+    print_word_list(words);
 
     // Verify that the list is sorted correctly
     assert(words.front().length() == 5);
     assert(words.back().length() == 6);
 }
 
-void testSortingInDictionary()
+void test_sorting_in_dictionary()
 {
     // Create a Dictionary object
     Dictionary dictionary("input.txt");
@@ -97,10 +97,10 @@ void testSortingInDictionary()
 
 int mainT()
 {
-    testSortingByWordText();
-    testSortingByWordFrequency();
-    testSortingByWordLength();
-    testSortingInDictionary();
+    test_sorting_by_word_text();
+    test_sorting_by_word_frequency();
+    test_sorting_by_word_length();
+    test_sorting_in_dictionary();
 
     std::cout << "All sorting tests passed!" << std::endl;
 

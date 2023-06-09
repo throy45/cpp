@@ -65,7 +65,7 @@ bool operator<(const Word &lhs, const Word &rhs)
     return lhs.compare(rhs) < 0;
 };
 
-bool isShorter(const Word &lhs, const Word &rhs)
+bool is_shorter(const Word &lhs, const Word &rhs)
 {
     if (lhs.length() == rhs.length())
     {
@@ -74,7 +74,7 @@ bool isShorter(const Word &lhs, const Word &rhs)
     return lhs.length() < rhs.length();
 };
 
-bool isLessFrequent(const Word &lhs, const Word &rhs)
+bool is_less_frequent(const Word &lhs, const Word &rhs)
 {
     if (lhs.get_frequency() == rhs.get_frequency())
     {

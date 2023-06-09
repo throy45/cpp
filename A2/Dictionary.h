@@ -23,10 +23,10 @@ using std::vector;
 
 class Dictionary
 {
-    string filename;
-    const string theDelimiters;
+    string file_name;
+    const string delimiters;
     vector<string> input_lines;
-    array<list<Word>, 27> wordListBuckets; // 26 alpha buckets + 1 none-alpha bucket
+    array<list<Word>, 27> word_list_buckets; // 26 alpha buckets + 1 none-alpha bucket
     size_t bucket_index(const string &wordText) const;
     vector<string> extract_words_from_line(const string &line) const;
     void push_back_into_bucket(const string &wordText, size_t &lineNumber);
@@ -45,7 +45,7 @@ public:
     void print_buckets_sorted_on_word_text(const set<char> &charSet) const;
     void print_buckets_sorted_on_word_frequency(const set<char> &charSet) const;
     void print_buckets_sorted_on_word_length(const set<char> &charSet) const;
-    string get_filename() const { return filename; }
-    string get_delimiters() const { return theDelimiters; }
+    string get_file_name() const { return file_name; }
+    string get_delimiters() const { return delimiters; }
 };
 #endif

@@ -34,7 +34,7 @@ public:
 };
 ostream &operator<<(ostream &sout, const Word &word);
 bool operator<(const Word &lhs, const Word &rhs);
-bool isShorter(const Word &lhs, const Word &rhs);
-bool isLessFrequent(const Word &lhs, const Word &rhs);
+bool is_shorter(const Word &lhs, const Word &rhs);
+bool is_less_frequent(const Word &lhs, const Word &rhs);
 
 #endif

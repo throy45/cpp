@@ -3,43 +3,21 @@
 #include <string>
 #include "Dictionary.h"
 
-int mainMenu();
+Dictionary initialize_dict();
+int main_menu();
 std::set<size_t> get_input_sizet_set();
 std::set<char> get_input_char_set();
-void option1(const Dictionary &dict);
-void option2345(const Dictionary &dict, int choice);
+void option_1(const Dictionary &dict);
+void option_2345(const Dictionary &dict, int choice);
 
 int main()
 {
-    std::string filename;
-    std::string delimiters;
-
-    std::cout << "Enter the name of an input text file: ";
-    std::getline(std::cin, filename);
-
-    std::ifstream file(filename);
-    if (!file)
-    {
-        std::cout << "File does not exist or cannot be opened" << std::endl;
-        return 1;
-    }
-    file.close();
-
-    std::cout << "Enter the seperator chracters: ";
-    std::getline(std::cin, delimiters);
-
-    if (delimiters.empty())
-    {
-        std::cout << "Separator characters cannot be empty. Please try again." << std::endl;
-        return 1;
-    }
-
-    Dictionary dict{filename, delimiters};
+    Dictionary dict = initialize_dict();
 
     bool exitFlag = false;
     while (!exitFlag)
     {
-        int choice = mainMenu();
+        int choice = main_menu();
         switch (choice)
         {
         case 0:
@@ -47,17 +25,17 @@ int main()
             exitFlag = true;
             break;
         case 1:
-            option1(dict);
+            option_1(dict);
             break;
         default:
-            option2345(dict, choice);
+            option_2345(dict, choice);
             break;
         }
     }
     return 0;
 }
 
-int mainMenu()
+int main_menu()
 {
     int choice = -1;
     while (choice < 0 || choice > 5)
@@ -83,17 +61,17 @@ int mainMenu()
     return choice;
 }
 
-void print_source_file_and_delimiters(const std::string &filename, const std::string &delimiters)
+void print_source_file_and_delimiters(const std::string &file_name, const std::string &delimiters)
 {
-    std::cout << "Dictionary source file: " << filename << std::endl;
+    std::cout << "Dictionary source file: " << file_name << std::endl;
     std::cout << "Separator characters: " << delimiters << std::endl;
 }
 
-void option1(const Dictionary &dict)
+void option_1(const Dictionary &dict)
 {
     std::cout << "Which lines? ";
     std::set<size_t> lines{get_input_sizet_set()};
-    print_source_file_and_delimiters(dict.get_filename(), dict.get_delimiters());
+    print_source_file_and_delimiters(dict.get_file_name(), dict.get_delimiters());
     std::cout
         << "Input Lines" << std::endl
         << "===========" << std::endl;
@@ -102,12 +80,12 @@ void option1(const Dictionary &dict)
               << std::endl;
 }
 
-void option2345(const Dictionary &dict, int choice)
+void option_2345(const Dictionary &dict, int choice)
 {
     std::cout << "Which buckets? ";
     std::set<char> buckets{get_input_char_set()};
     std::cout << std::endl;
-    print_source_file_and_delimiters(dict.get_filename(), dict.get_delimiters());
+    print_source_file_and_delimiters(dict.get_file_name(), dict.get_delimiters());
     switch (choice)
     {
     case 2:
@@ -141,7 +119,7 @@ void option2345(const Dictionary &dict, int choice)
     }
 }
 
-bool isPositiveInteger(const std::string &s)
+bool is_positive_integer(const std::string &s)
 {
     if (s.empty())
     {
@@ -168,7 +146,7 @@ std::set<size_t> get_input_sizet_set()
     std::string token;
     while (iss >> token)
     {
-        if (isPositiveInteger(token))
+        if (is_positive_integer(token))
         {
             result.insert(static_cast<size_t>(std::stoul(token)));
         }
@@ -182,14 +160,63 @@ std::set<char> get_input_char_set()
 
     std::string input;
     std::getline(std::cin, input);
+    bool specials = false;
     for (char c : input)
     {
-        c = std::tolower(c);
-
-        if (std::isalpha(c))
+        if (std::isalpha(c) && !result.contains(std::tolower(c)) && !result.contains(std::toupper(c)))
         {
             result.insert(c);
         }
+        else if (!std::isspace(c) && !std::isalpha(c))
+        {
+            specials = true;
+        }
+    }
+    if (specials)
+    {
+        result.insert('!');
     }
     return result;
+}
+
+Dictionary initialize_dict()
+{
+
+    std::string file_name;
+    std::string delimiters;
+
+    bool invalidInput = true;
+    while (invalidInput)
+    {
+        std::cout << "Enter the name of an input text file: ";
+        std::getline(std::cin, file_name);
+
+        std::ifstream file(file_name);
+        if (!file)
+        {
+            std::cout << "File does not exist or cannot be opened" << std::endl;
+        }
+        else
+        {
+            invalidInput = false;
+        }
+        file.close();
+    }
+
+    invalidInput = true;
+    while (invalidInput)
+    {
+        std::cout << "Enter the seperator characters: ";
+        std::getline(std::cin, delimiters);
+
+        if (delimiters.empty())
+        {
+            std::cout << "Separator characters cannot be empty. Please try again." << std::endl;
+        }
+        else
+        {
+            invalidInput = false;
+        }
+    }
+    return Dictionary{file_name, delimiters};
 }
