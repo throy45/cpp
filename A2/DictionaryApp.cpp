@@ -10,6 +10,12 @@ std::set<char> get_input_char_set();
 void option_1(const Dictionary &dict);
 void option_2345(const Dictionary &dict, int choice);
 
+/**
+ * This is a main function that initializes a dictionary and presents a menu with different options to
+ * the user.
+ *
+ * @return The main function is returning an integer value of 0.
+ */
 int main()
 {
     Dictionary dict = initialize_dict();
@@ -35,6 +41,13 @@ int main()
     return 0;
 }
 
+/**
+ * The function displays a menu of options and prompts the user to choose one, returning the user's
+ * choice.
+ *
+ * @return The function `main_menu()` returns an integer value representing the user's choice from the
+ * menu options.
+ */
 int main_menu()
 {
     int choice = -1;
@@ -61,12 +74,28 @@ int main_menu()
     return choice;
 }
 
+/**
+ * The function prints the name of a source file and a set of delimiters to the console.
+ *
+ * @param file_name A string representing the name of the source file for a dictionary.
+ * @param delimiters A string containing the characters that are used as separators in the source file.
+ * These characters are used to split the text into individual words or tokens. The function prints the
+ * source file name and the delimiter characters to the console.
+ */
 void print_source_file_and_delimiters(const std::string &file_name, const std::string &delimiters)
 {
     std::cout << "Dictionary source file: " << file_name << std::endl;
     std::cout << "Separator characters: " << delimiters << std::endl;
 }
 
+/**
+ * This function prompts the user to input specific lines from a dictionary and then prints those
+ * lines.
+ *
+ * @param dict The parameter "dict" is of type "const Dictionary&", which means it is a constant
+ * reference to an object of class "Dictionary". This object is likely used to store information about
+ * a source file, such as its name and the delimiters used in the file.
+ */
 void option_1(const Dictionary &dict)
 {
     std::cout << "Which lines? ";
@@ -80,6 +109,12 @@ void option_1(const Dictionary &dict)
               << std::endl;
 }
 
+/**
+ * This function prints out different views of a dictionary based on user input.
+ *
+ * @param dict The parameter `dict` is a constant reference to an object of the `Dictionary` class.
+ * @param choice An integer representing the user's choice of which option to execute (2, 3, 4, or 5).
+ */
 void option_2345(const Dictionary &dict, int choice)
 {
     std::cout << "Which buckets? ";
@@ -119,6 +154,13 @@ void option_2345(const Dictionary &dict, int choice)
     }
 }
 
+/**
+ * The function checks if a given string contains only positive integers.
+ *
+ * @param s The input string that needs to be checked if it represents a positive integer or not.
+ * @return a boolean value. It returns true if the input string contains only positive integers (i.e.,
+ * digits 0-9) and false otherwise.
+ */
 bool is_positive_integer(const std::string &s)
 {
     if (s.empty())
@@ -135,6 +177,12 @@ bool is_positive_integer(const std::string &s)
     return true;
 }
 
+/**
+ * This function reads a line of input from the user, extracts positive integers from it, and returns
+ * them as a set of size_t.
+ *
+ * @return A `std::set` of `size_t` values is being returned.
+ */
 std::set<size_t> get_input_sizet_set()
 {
     std::set<size_t> result;
@@ -154,6 +202,14 @@ std::set<size_t> get_input_sizet_set()
     return result;
 }
 
+/**
+ * This function takes user input and returns a set of unique alphabetical characters and an
+ * exclamation mark if any non-alphabetical characters were present in the input.
+ *
+ * @return A `std::set` of unique characters that were inputted by the user, excluding whitespace and
+ * duplicates, and including an exclamation mark if any non-alphabetic special characters were
+ * inputted.
+ */
 std::set<char> get_input_char_set()
 {
     std::set<char> result;
@@ -179,6 +235,12 @@ std::set<char> get_input_char_set()
     return result;
 }
 
+/**
+ * This function initializes a dictionary by prompting the user to input a file name and separator
+ * characters.
+ *
+ * @return A Dictionary object is being returned.
+ */
 Dictionary initialize_dict()
 {
 
@@ -200,7 +262,6 @@ Dictionary initialize_dict()
         {
             invalidInput = false;
         }
-        file.close();
     }
 
     invalidInput = true;
