@@ -3,6 +3,7 @@
 
 #include <array>
 #include <iostream>
+#include <stdexcept>
 
 class Mat2x2
 {
@@ -25,8 +26,8 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Mat2x2& m);
 
-    int determinant() const;
-    int trace() const;
+    double determinant() const;
+    double trace() const;
     Mat2x2 transpose() const;
     bool isSymmetric() const;
     bool isSimilar(const Mat2x2& m) const;
@@ -38,23 +39,23 @@ public:
     Mat2x2& operator-=(const Mat2x2& m);
     Mat2x2& operator*=(const Mat2x2& m);
     Mat2x2& operator/=(const Mat2x2& m);
-    Mat2x2& operator+=(int i);
-    Mat2x2& operator-=(int i);
-    Mat2x2& operator*=(int i);
-    Mat2x2& operator/=(int i);
+    Mat2x2& operator+=(double i);
+    Mat2x2& operator-=(double i);
+    Mat2x2& operator*=(double i);
+    Mat2x2& operator/=(double i);
 
     friend Mat2x2 operator+(const Mat2x2& lhs, const Mat2x2& rhs);
     friend Mat2x2 operator-(const Mat2x2& lhs, const Mat2x2& rhs);
     friend Mat2x2 operator*(const Mat2x2& lhs, const Mat2x2& rhs);
     friend Mat2x2 operator/(const Mat2x2& lhs, const Mat2x2& rhs);
-    friend Mat2x2 operator+(const Mat2x2& lhs, int rhs);
-    friend Mat2x2 operator-(const Mat2x2& lhs, int rhs);
-    friend Mat2x2 operator*(const Mat2x2& lhs, int rhs);
-    friend Mat2x2 operator/(const Mat2x2& lhs, int rhs);
-    friend Mat2x2 operator+(int lhs, const Mat2x2& rhs);
-    friend Mat2x2 operator-(int lhs, const Mat2x2& rhs);
-    friend Mat2x2 operator*(int lhs, const Mat2x2& rhs);
-    friend Mat2x2 operator/(int lhs, const Mat2x2& rhs);
+    friend Mat2x2 operator+(const Mat2x2& lhs, double rhs);
+    friend Mat2x2 operator-(const Mat2x2& lhs, double rhs);
+    friend Mat2x2 operator*(const Mat2x2& lhs, double rhs);
+    friend Mat2x2 operator/(const Mat2x2& lhs, double rhs);
+    friend Mat2x2 operator+(double lhs, const Mat2x2& rhs);
+    friend Mat2x2 operator-(double lhs, const Mat2x2& rhs);
+    friend Mat2x2 operator*(double lhs, const Mat2x2& rhs);
+    friend Mat2x2 operator/(double lhs, const Mat2x2& rhs);
 
     friend bool operator==(const Mat2x2& lhs, const Mat2x2& rhs);
     friend bool operator!=(const Mat2x2& lhs, const Mat2x2& rhs);
@@ -70,7 +71,7 @@ public:
 
     bool operator!() const;
 
-    int operator()() const;
+    double operator()() const;
 
     operator bool() const;
 
@@ -80,6 +81,21 @@ public:
     const std::array<std::array<double, 2>, 2>& getMatrix() const {
         return matrix;
     };
+
+
+
+    Mat2x2& operator+=(int i);
+    Mat2x2& operator-=(int i);
+    Mat2x2& operator*=(int i);
+    Mat2x2& operator/=(int i);
+    friend Mat2x2 operator+(const Mat2x2& lhs, int rhs);
+    friend Mat2x2 operator-(const Mat2x2& lhs, int rhs);
+    friend Mat2x2 operator*(const Mat2x2& lhs, int rhs);
+    friend Mat2x2 operator/(const Mat2x2& lhs, int rhs);
+    friend Mat2x2 operator+(int lhs, const Mat2x2& rhs);
+    friend Mat2x2 operator-(int lhs, const Mat2x2& rhs);
+    friend Mat2x2 operator*(int lhs, const Mat2x2& rhs);
+    friend Mat2x2 operator/(int lhs, const Mat2x2& rhs);
 };
 
 #endif
