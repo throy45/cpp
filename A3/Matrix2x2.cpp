@@ -9,7 +9,7 @@ Mat2x2::Mat2x2()
     matrix[1][1] = 0;
 }
 
-Mat2x2::Mat2x2(int a, int b, int c, int d)
+Mat2x2::Mat2x2(double a, double b, double c, double d)
 {
     matrix[0][0] = a;
     matrix[0][1] = b;
@@ -19,6 +19,7 @@ Mat2x2::Mat2x2(int a, int b, int c, int d)
 
 std::istream& operator>>(std::istream& is, Mat2x2& m)
 {
+    std::cout << "Enter matrix elements: ";
     is >> m.matrix[0][0] >> m.matrix[0][1] >> m.matrix[1][0] >> m.matrix[1][1];
     return is;
 }
@@ -30,12 +31,12 @@ std::ostream& operator<<(std::ostream& os, const Mat2x2& m)
     return os;
 }
 
-double Mat2x2::determinant() const
+int Mat2x2::determinant() const
 {
     return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 }
 
-double Mat2x2::trace() const
+int Mat2x2::trace() const
 {
     return matrix[0][0] + matrix[1][1];
 }
@@ -64,7 +65,7 @@ Mat2x2 Mat2x2::inverse() const
 {
     if (isInvertible())
     {
-        double det = determinant();
+        int det = determinant();
         return Mat2x2(matrix[1][1] / det, -matrix[0][1] / det, -matrix[1][0] / det, matrix[0][0] / det);
     }
     else
@@ -93,10 +94,10 @@ Mat2x2& Mat2x2::operator-=(const Mat2x2& m)
 
 Mat2x2& Mat2x2::operator*=(const Mat2x2& m)
 {
-    double a = matrix[0][0] * m.matrix[0][0] + matrix[0][1] * m.matrix[1][0];
-    double b = matrix[0][0] * m.matrix[0][1] + matrix[0][1] * m.matrix[1][1];
-    double c = matrix[1][0] * m.matrix[0][0] + matrix[1][1] * m.matrix[1][0];
-    double d = matrix[1][0] * m.matrix[0][1] + matrix[1][1] * m.matrix[1][1];
+    int a = matrix[0][0] * m.matrix[0][0] + matrix[0][1] * m.matrix[1][0];
+    int b = matrix[0][0] * m.matrix[0][1] + matrix[0][1] * m.matrix[1][1];
+    int c = matrix[1][0] * m.matrix[0][0] + matrix[1][1] * m.matrix[1][0];
+    int d = matrix[1][0] * m.matrix[0][1] + matrix[1][1] * m.matrix[1][1];
     matrix[0][0] = a;
     matrix[0][1] = b;
     matrix[1][0] = c;
@@ -160,49 +161,49 @@ Mat2x2& Mat2x2::operator/=(int i)
     }
 }
 
-Mat2x2& operator+(const Mat2x2& lhs, const Mat2x2& rhs)
+Mat2x2 operator+(const Mat2x2& lhs, const Mat2x2& rhs)
 {
     Mat2x2 m(lhs);
     m += rhs;
     return m;
 }
 
-Mat2x2& operator-(const Mat2x2& lhs, const Mat2x2& rhs)
+Mat2x2 operator-(const Mat2x2& lhs, const Mat2x2& rhs)
 {
     Mat2x2 m(lhs);
     m -= rhs;
     return m;
 }
 
-Mat2x2& operator*(const Mat2x2& lhs, const Mat2x2& rhs)
+Mat2x2 operator*(const Mat2x2& lhs, const Mat2x2& rhs)
 {
     Mat2x2 m(lhs);
     m *= rhs;
     return m;
 }
 
-Mat2x2& operator/(const Mat2x2& lhs, const Mat2x2& rhs)
+Mat2x2 operator/(const Mat2x2& lhs, const Mat2x2& rhs)
 {
     Mat2x2 m(lhs);
     m /= rhs;
     return m;
 }
 
-Mat2x2& operator+(const Mat2x2& lhs, int rhs)
+Mat2x2 operator+(const Mat2x2& lhs, int rhs)
 {
     Mat2x2 m(lhs);
     m += rhs;
     return m;
 }
 
-Mat2x2& operator-(const Mat2x2& lhs, int rhs)
+Mat2x2 operator-(const Mat2x2& lhs, int rhs)
 {
     Mat2x2 m(lhs);
     m -= rhs;
     return m;
 }
 
-Mat2x2& operator*(const Mat2x2& lhs, int rhs)
+Mat2x2 operator*(const Mat2x2& lhs, int rhs)
 {
     Mat2x2 m(lhs);
     m *= rhs;
@@ -210,7 +211,7 @@ Mat2x2& operator*(const Mat2x2& lhs, int rhs)
 }
 
 
-Mat2x2& operator/(const Mat2x2& lhs, int rhs)
+Mat2x2 operator/(const Mat2x2& lhs, int rhs)
 {
     Mat2x2 m(lhs);
     m /= rhs;
@@ -218,22 +219,23 @@ Mat2x2& operator/(const Mat2x2& lhs, int rhs)
 }
 
 
-Mat2x2& operator+(int lhs, const Mat2x2& rhs)
+Mat2x2 operator+(int lhs, const Mat2x2& rhs)
 {
     Mat2x2 m(rhs);
     m += lhs;
     return m;
 }
 
-Mat2x2& operator-(int lhs, const Mat2x2& rhs)
+Mat2x2 operator-(int lhs, const Mat2x2& rhs)
 {
     Mat2x2 m(rhs);
-    m -= lhs;
+    m *= -1;
+    m += lhs;
     return m;
 }
 
 
-Mat2x2& operator*(int lhs, const Mat2x2& rhs)
+Mat2x2 operator*(int lhs, const Mat2x2& rhs)
 {
     Mat2x2 m(rhs);
     m *= lhs;
@@ -241,7 +243,7 @@ Mat2x2& operator*(int lhs, const Mat2x2& rhs)
 }
 
 
-Mat2x2& operator/(int lhs, const Mat2x2& rhs)
+Mat2x2 operator/(int lhs, const Mat2x2& rhs)
 {
     Mat2x2 m(rhs);
     m /= lhs;
@@ -271,7 +273,7 @@ Mat2x2& Mat2x2::operator++()
     return *this;
 }
 
-Mat2x2 Mat2x2::operator++(int)
+Mat2x2 Mat2x2::operator++(int i)
 {
     Mat2x2 m(*this);
     ++(*this);
@@ -287,7 +289,7 @@ Mat2x2& Mat2x2::operator--()
     return *this;
 }
 
-Mat2x2 Mat2x2::operator--(int)
+Mat2x2 Mat2x2::operator--(int i)
 {
     Mat2x2 m(*this);
     --(*this);
@@ -347,7 +349,7 @@ bool Mat2x2::operator!() const
     return !isInvertible();
 }
 
-double Mat2x2::operator()() const
+int Mat2x2::operator()() const
 {
     return determinant();
 }
@@ -355,5 +357,17 @@ double Mat2x2::operator()() const
 Mat2x2::operator bool() const
 {
     return isInvertible();
+}
+
+
+Mat2x2 operator+(const Mat2x2& m)
+{
+    return m;
+}
+
+Mat2x2 operator-(const Mat2x2& m)
+{
+    std::array<std::array<double, 2>, 2> m1 = m.getMatrix();
+    return Mat2x2(-m1[0][0], -m1[0][1], -m1[1][0], -m1[1][1]);
 }
 
