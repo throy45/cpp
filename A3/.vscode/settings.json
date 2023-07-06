@@ -98,5 +98,6 @@
     "stop_token": "cpp",
     "thread": "cpp",
     "cinttypes": "cpp"
-  }
+  },
+  "docwriter.style": "Javadoc"
 }

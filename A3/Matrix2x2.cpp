@@ -1,5 +1,8 @@
 #include "Matrix2x2.h"
 
+// Thomas Roy 40209149
+// COMP 5461 - A3
+// July 2023
 
 /**
  * This is a constructor for a 2x2 matrix class in C++, initializing all elements to
@@ -51,7 +54,7 @@ std::ostream& operator<<(std::ostream& os, const Mat2x2& m)
  * @return The determinant of the 2x2 matrix.
  */
 
-double Mat2x2::determinant() const
+double Mat2x2::determinant() const noexcept
 {
     return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 }
@@ -61,7 +64,7 @@ double Mat2x2::determinant() const
  *
  * @return the sum of the diagonal elements of the 2x2 matrix.
  */
-double Mat2x2::trace() const
+double Mat2x2::trace() const noexcept
 {
     return matrix[0][0] + matrix[1][1];
 }
@@ -71,7 +74,7 @@ double Mat2x2::trace() const
  *
  * @return The transpose of the 2x2 matrix.
  */
-Mat2x2 Mat2x2::transpose() const
+Mat2x2 Mat2x2::transpose() const noexcept
 {
     return Mat2x2(matrix[0][0], matrix[1][0], matrix[0][1], matrix[1][1]);
 }
@@ -81,7 +84,7 @@ Mat2x2 Mat2x2::transpose() const
  *
  * @return a boolean value, indicating whether the matrix is symmetric or not.
  */
-bool Mat2x2::isSymmetric() const
+bool Mat2x2::isSymmetric() const noexcept
 {
     return matrix[0][1] == matrix[1][0];
 }
@@ -92,7 +95,7 @@ bool Mat2x2::isSymmetric() const
  * @param m The parameter `m` is a reference to a `Mat2x2` object.
  * @return a boolean value.
  */
-bool Mat2x2::isSimilar(const Mat2x2& m) const
+bool Mat2x2::isSimilar(const Mat2x2& m) const noexcept
 {
     return (abs(determinant() - m.determinant()) < tolerance) && (abs(trace() - m.trace()) < tolerance);
 }
@@ -103,7 +106,7 @@ bool Mat2x2::isSimilar(const Mat2x2& m) const
  *
  * @return a boolean value.
  */
-bool Mat2x2::isInvertible() const
+bool Mat2x2::isInvertible() const noexcept
 {
     return !(abs(determinant()) < tolerance);
 }
@@ -133,7 +136,7 @@ Mat2x2 Mat2x2::inverse() const
  *
  * @return The `operator+=` function returns a reference to the modified `Mat2x2` object.
  */
-Mat2x2& Mat2x2::operator+=(const Mat2x2& m)
+Mat2x2& Mat2x2::operator+=(const Mat2x2& m) noexcept
 {
     matrix[0][0] += m.matrix[0][0];
     matrix[0][1] += m.matrix[0][1];
@@ -148,9 +151,9 @@ Mat2x2& Mat2x2::operator+=(const Mat2x2& m)
  *
  * @return a reference to the current object, which is of type Mat2x2.
  */
-Mat2x2& Mat2x2::operator-=(const Mat2x2& m)
+Mat2x2& Mat2x2::operator-=(const Mat2x2& m) noexcept
 {
-    return *this += -m;
+    return *this += (-1 * m);
 }
 
 /**
@@ -159,7 +162,7 @@ Mat2x2& Mat2x2::operator-=(const Mat2x2& m)
  *
  * @return a reference to the modified object itself (i.e., the current instance of the Mat2x2 class).
  */
-Mat2x2& Mat2x2::operator*=(const Mat2x2& m)
+Mat2x2& Mat2x2::operator*=(const Mat2x2& m) noexcept
 {
     double a = matrix[0][0] * m.matrix[0][0] + matrix[0][1] * m.matrix[1][0];
     double b = matrix[0][0] * m.matrix[0][1] + matrix[0][1] * m.matrix[1][1];
@@ -197,7 +200,7 @@ Mat2x2& Mat2x2::operator/=(const Mat2x2& m)
  *
  * @return a reference to the modified matrix object.
  */
-Mat2x2& Mat2x2::operator+=(double i)
+Mat2x2& Mat2x2::operator+=(double i) noexcept
 {
     matrix[0][0] += i;
     matrix[0][1] += i;
@@ -212,7 +215,7 @@ Mat2x2& Mat2x2::operator+=(double i)
  *
  * @return a reference to the current object, which is of type Mat2x2.
  */
-Mat2x2& Mat2x2::operator-=(double i)
+Mat2x2& Mat2x2::operator-=(double i) noexcept
 {
     return *this += -i;
 }
@@ -222,7 +225,7 @@ Mat2x2& Mat2x2::operator-=(double i)
  *
  * @return a reference to the modified object itself, which is denoted by `*this`.
  */
-Mat2x2& Mat2x2::operator*=(double i)
+Mat2x2& Mat2x2::operator*=(double i) noexcept
 {
     matrix[0][0] *= i;
     matrix[0][1] *= i;
@@ -261,7 +264,7 @@ Mat2x2& Mat2x2::operator/=(double i)
  * @param rhs The parameter "rhs" is a reference to a constant Mat2x2 object.
  * @return a new Mat2x2 object that is the result of adding the two input Mat2x2 objects together.
  */
-Mat2x2 operator+(const Mat2x2& lhs, const Mat2x2& rhs)
+Mat2x2 operator+(const Mat2x2& lhs, const Mat2x2& rhs) noexcept
 {
     Mat2x2 m(lhs);
     m += rhs;
@@ -277,7 +280,7 @@ Mat2x2 operator+(const Mat2x2& lhs, const Mat2x2& rhs)
  * @return a new instance of the Mat2x2 class, which is the result of subtracting the rhs matrix from
  * the lhs matrix.
  */
-Mat2x2 operator-(const Mat2x2& lhs, const Mat2x2& rhs)
+Mat2x2 operator-(const Mat2x2& lhs, const Mat2x2& rhs) noexcept
 {
     Mat2x2 m(lhs);
     m -= rhs;
@@ -293,7 +296,7 @@ Mat2x2 operator-(const Mat2x2& lhs, const Mat2x2& rhs)
  * @return a new instance of the Mat2x2 class, which is the result of multiplying the two input
  * matrices (lhs and rhs) together.
  */
-Mat2x2 operator*(const Mat2x2& lhs, const Mat2x2& rhs)
+Mat2x2 operator*(const Mat2x2& lhs, const Mat2x2& rhs) noexcept
 {
     Mat2x2 m(lhs);
     m *= rhs;
@@ -325,7 +328,7 @@ Mat2x2 operator/(const Mat2x2& lhs, const Mat2x2& rhs)
  * @return a new Mat2x2 object that is the result of adding the double value `rhs` to each element of
  * the input Mat2x2 object `lhs`.
  */
-Mat2x2 operator+(const Mat2x2& lhs, double rhs)
+Mat2x2 operator+(const Mat2x2& lhs, double rhs) noexcept
 {
     Mat2x2 m(lhs);
     m += rhs;
@@ -341,7 +344,7 @@ Mat2x2 operator+(const Mat2x2& lhs, double rhs)
  * @return a new Mat2x2 object that is the result of subtracting the value of rhs from each element of
  * the lhs Mat2x2 object.
  */
-Mat2x2 operator-(const Mat2x2& lhs, double rhs)
+Mat2x2 operator-(const Mat2x2& lhs, double rhs) noexcept
 {
     Mat2x2 m(lhs);
     m -= rhs;
@@ -357,7 +360,7 @@ Mat2x2 operator-(const Mat2x2& lhs, double rhs)
  * @return a new Mat2x2 object that is the result of multiplying the input Mat2x2 object (lhs) by a
  * scalar value (rhs).
  */
-Mat2x2 operator*(const Mat2x2& lhs, double rhs)
+Mat2x2 operator*(const Mat2x2& lhs, double rhs) noexcept
 {
     Mat2x2 m(lhs);
     m *= rhs;
@@ -390,7 +393,7 @@ Mat2x2 operator/(const Mat2x2& lhs, double rhs)
  * @return a new Mat2x2 object that is the result of adding a scalar value (lhs) to each element of the
  * input Mat2x2 object (rhs).
  */
-Mat2x2 operator+(double lhs, const Mat2x2& rhs)
+Mat2x2 operator+(double lhs, const Mat2x2& rhs) noexcept
 {
     Mat2x2 m(rhs);
     m += lhs;
@@ -406,7 +409,7 @@ Mat2x2 operator+(double lhs, const Mat2x2& rhs)
  * @param rhs The parameter "rhs" is a constant reference to a Mat2x2 object.
  * @return a Mat2x2 object.
  */
-Mat2x2 operator-(double lhs, const Mat2x2& rhs)
+Mat2x2 operator-(double lhs, const Mat2x2& rhs) noexcept
 {
     Mat2x2 m(rhs);
     m -= lhs;
@@ -425,7 +428,7 @@ Mat2x2 operator-(double lhs, const Mat2x2& rhs)
  * @return a new Mat2x2 object that is the result of multiplying the given double value (lhs) with the
  * given Mat2x2 object (rhs).
  */
-Mat2x2 operator*(double lhs, const Mat2x2& rhs)
+Mat2x2 operator*(double lhs, const Mat2x2& rhs) noexcept
 {
     Mat2x2 m(rhs);
     m *= lhs;
@@ -456,7 +459,7 @@ Mat2x2 operator/(double lhs, const Mat2x2& rhs)
  * @param rhs The parameter "rhs" is a reference to a constant object of type Mat2x2.
  * @return a boolean value.
  */
-bool operator==(const Mat2x2& lhs, const Mat2x2& rhs)
+bool operator==(const Mat2x2& lhs, const Mat2x2& rhs) noexcept
 {
     return (abs(lhs.matrix[0][0] - rhs.matrix[0][0]) < Mat2x2::tolerance) &&
         (abs(lhs.matrix[0][1] - rhs.matrix[0][1]) < Mat2x2::tolerance) &&
@@ -472,7 +475,7 @@ bool operator==(const Mat2x2& lhs, const Mat2x2& rhs)
  * @param rhs The rhs parameter is a reference to a constant Mat2x2 object.
  * @return a boolean value.
  */
-bool operator!=(const Mat2x2& lhs, const Mat2x2& rhs)
+bool operator!=(const Mat2x2& lhs, const Mat2x2& rhs) noexcept
 {
     return !(lhs == rhs);
 }
@@ -483,7 +486,7 @@ bool operator!=(const Mat2x2& lhs, const Mat2x2& rhs)
  *
  * @return a reference to the updated matrix object.
  */
-Mat2x2& Mat2x2::operator++()
+Mat2x2& Mat2x2::operator++() noexcept
 {
     return *this += 1;
 }
@@ -495,7 +498,7 @@ Mat2x2& Mat2x2::operator++()
  * is declared but not used anywhere in the code.
  * @return The post-incremented value of the Mat2x2 object.
  */
-Mat2x2 Mat2x2::operator++(int i)
+Mat2x2 Mat2x2::operator++(int i) noexcept
 {
     Mat2x2 m(*this);
     ++(*this);
@@ -508,7 +511,7 @@ Mat2x2 Mat2x2::operator++(int i)
  *
  * @return The operator--() function is returning a reference to a Mat2x2 object.
  */
-Mat2x2& Mat2x2::operator--()
+Mat2x2& Mat2x2::operator--() noexcept
 {
     return *this -= 1;
 }
@@ -521,7 +524,7 @@ Mat2x2& Mat2x2::operator--()
  * being used in the function body.
  * @return The post-decremented value of the Mat2x2 object before the decrement operation is performed.
  */
-Mat2x2 Mat2x2::operator--(int i)
+Mat2x2 Mat2x2::operator--(int i) noexcept
 {
     Mat2x2 m(*this);
     --(*this);
@@ -553,6 +556,11 @@ double& Mat2x2::operator[](int i)
 }
 
 
+/**
+ * The function returns a reference to a specific element in a 2x2 matrix.
+ *
+ * @return The code is returning a reference to a constant double value.
+ */
 const double& Mat2x2::operator[](int i) const
 {
     switch (i)
@@ -575,7 +583,7 @@ const double& Mat2x2::operator[](int i) const
  *
  * @return The operator returns the logical negation of the result of the `isInvertible()` function.
  */
-bool Mat2x2::operator!() const
+bool Mat2x2::operator!() const noexcept
 {
     return !isInvertible();
 }
@@ -585,7 +593,7 @@ bool Mat2x2::operator!() const
  *
  * @return The `determinant()` of the `Mat2x2` object is being returned.
  */
-double Mat2x2::operator()() const
+double Mat2x2::operator()() const noexcept
 {
     return determinant();
 }
@@ -595,7 +603,7 @@ double Mat2x2::operator()() const
  *
  * @return The operator bool() function is returning the result of the isInvertible() function.
  */
-Mat2x2::operator bool() const
+Mat2x2::operator bool() const noexcept
 {
     return isInvertible();
 }
@@ -607,7 +615,7 @@ Mat2x2::operator bool() const
  * @param m The parameter "m" is a constant reference to a Mat2x2 object.
  * @return The Mat2x2 object "m" is being returned.
  */
-Mat2x2 operator+(const Mat2x2& m)
+Mat2x2 operator+(const Mat2x2& m) noexcept
 {
     return m;
 }
@@ -619,22 +627,121 @@ Mat2x2 operator+(const Mat2x2& m)
  * @param m The parameter `m` is a constant reference to an object of type `Mat2x2`.
  * @return a new Mat2x2 object that is the negation of the input matrix.
  */
-Mat2x2 operator-(const Mat2x2& m)
+Mat2x2 operator-(const Mat2x2& m) noexcept
 {
-    std::array<std::array<double, 2>, 2> m1 = m.getMatrix();
-    return -1 * m; // here check!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    return -1 * m;
 }
 
 
-Mat2x2& Mat2x2::operator+=(int i) { return this->operator+=(static_cast<double>(i)); }
-Mat2x2& Mat2x2::operator-=(int i) { return this->operator-=(static_cast<double>(i)); }
-Mat2x2& Mat2x2::operator*=(int i) { return this->operator*=(static_cast<double>(i)); }
+// The following are overloaded operators for the Mat2x2 class and a int value.
+// Since the compiler has a hard time casting from int to double
+
+/**
+ * The function overloads the += operator for a Mat2x2 object to add an integer to each element of the
+ * matrix.
+ *
+ * @return The `operator+=` function returns a reference to the modified `Mat2x2` object.
+ */
+Mat2x2& Mat2x2::operator+=(int i) noexcept { return this->operator+=(static_cast<double>(i)); }
+
+/**
+ * The function subtracts an integer from each element of a 2x2 matrix and returns a reference to the
+ * modified matrix.
+ *
+ * @return The return type is `Mat2x2&`.
+ */
+Mat2x2& Mat2x2::operator-=(int i) noexcept { return this->operator-=(static_cast<double>(i)); }
+
+/**
+ * The function multiplies a Mat2x2 object by an integer and assigns the result to the object itself.
+ *
+ * @return The `operator*=` function returns a reference to the modified `Mat2x2` object.
+ */
+Mat2x2& Mat2x2::operator*=(int i) noexcept { return this->operator*=(static_cast<double>(i)); }
+
+/**
+ * The function overloads the division assignment operator for a 2x2 matrix, dividing each element by
+ * an integer.
+ *
+ * @return a reference to a Mat2x2 object.
+ */
 Mat2x2& Mat2x2::operator/=(int i) { return this->operator/=(static_cast<double>(i)); }
-Mat2x2 operator+(const Mat2x2& lhs, int rhs) { return lhs + static_cast<double>(rhs); }
-Mat2x2 operator-(const Mat2x2& lhs, int rhs) { return lhs - static_cast<double>(rhs); }
-Mat2x2 operator*(const Mat2x2& lhs, int rhs) { return lhs * static_cast<double>(rhs); }
+
+/**
+ * The function overloads the addition operator for a 2x2 matrix and an integer.
+ *
+ * @param lhs A constant reference to a Mat2x2 object.
+ * @param rhs The parameter "rhs" is an integer value that is being added to a 2x2 matrix.
+ * @return a Mat2x2 object.
+ */
+Mat2x2 operator+(const Mat2x2& lhs, int rhs) noexcept { return lhs + static_cast<double>(rhs); }
+
+
+/**
+ * The function overloads the subtraction operator for a 2x2 matrix and an integer.
+ *
+ * @param lhs A constant reference to a Mat2x2 object, which is the left-hand side operand of the
+ * subtraction operator.
+ * @param rhs The parameter "rhs" is an integer value.
+ * @return a `Mat2x2` object.
+ */
+Mat2x2 operator-(const Mat2x2& lhs, int rhs) noexcept { return lhs - static_cast<double>(rhs); }
+
+/**
+ * The function overloads the multiplication operator for a 2x2 matrix and an integer.
+ *
+ * @param lhs A constant reference to a Mat2x2 object, representing the left-hand side of the
+ * multiplication operation.
+ * @param rhs The parameter "rhs" is an integer value.
+ * @return a `Mat2x2` object.
+ */
+Mat2x2 operator*(const Mat2x2& lhs, int rhs) noexcept { return lhs * static_cast<double>(rhs); }
+
+/**
+ * The function overloads the division operator for a 2x2 matrix and an integer, returning the result
+ * as a matrix divided by the integer.
+ *
+ * @param lhs A constant reference to a Mat2x2 object, which is the left-hand side of the division
+ * operation.
+ * @param rhs The parameter "rhs" is an integer value.
+ * @return a Mat2x2 object.
+ */
 Mat2x2 operator/(const Mat2x2& lhs, int rhs) { return lhs / static_cast<double>(rhs); }
-Mat2x2 operator+(int lhs, const Mat2x2& rhs) { return static_cast<double>(lhs) + rhs; }
-Mat2x2 operator-(int lhs, const Mat2x2& rhs) { return static_cast<double>(lhs) - rhs; }
-Mat2x2 operator*(int lhs, const Mat2x2& rhs) { return static_cast<double>(lhs) * rhs; }
+
+/**
+ * The function overloads the addition operator to allow adding an integer to a 2x2 matrix.
+ *
+ * @param lhs An integer value that represents the left-hand side operand of the addition operation.
+ * @param rhs The parameter "rhs" is a constant reference to a Mat2x2 object.
+ * @return a Mat2x2 object.
+ */
+Mat2x2 operator+(int lhs, const Mat2x2& rhs) noexcept { return static_cast<double>(lhs) + rhs; }
+
+/**
+ * The function overloads the subtraction operator for an integer and a 2x2 matrix.
+ *
+ * @param lhs An integer value that represents the left-hand side operand of the subtraction operation.
+ * @param rhs The parameter "rhs" is a constant reference to an object of type Mat2x2.
+ * @return a Mat2x2 object.
+ */
+Mat2x2 operator-(int lhs, const Mat2x2& rhs) noexcept { return static_cast<double>(lhs) - rhs; }
+
+/**
+ * The function overloads the multiplication operator to allow an integer to be multiplied by a 2x2
+ * matrix.
+ *
+ * @param lhs An integer value that represents the left-hand side operand of the multiplication
+ * operation.
+ * @param rhs The parameter "rhs" is a constant reference to a Mat2x2 object.
+ * @return a Mat2x2 object.
+ */
+Mat2x2 operator*(int lhs, const Mat2x2& rhs) noexcept { return static_cast<double>(lhs) * rhs; }
+
+/**
+ * The function overloads the division operator to divide an integer by a 2x2 matrix.
+ *
+ * @param lhs An integer value that represents the left-hand side of the division operation.
+ * @param rhs The parameter "rhs" is a constant reference to an object of type Mat2x2.
+ * @return a Mat2x2 object.
+ */
 Mat2x2 operator/(int lhs, const Mat2x2& rhs) { return static_cast<double>(lhs) / rhs; }
