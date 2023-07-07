@@ -186,7 +186,7 @@ void Dictionary::print_original_buckets(const set<char> &charSet) const
                 }
             }
         }
-        if (charSet.contains('!'))
+        if (charSet.find('!') != charSet.end())
         {
             std::cout << "<>" << std::endl;
             for (auto &word : word_list_buckets[26])
@@ -249,7 +249,7 @@ void Dictionary::print_buckets_sorted_on_word_text(const set<char> &charSet) con
                 }
             }
         }
-        if (charSet.contains('!'))
+        if (charSet.find('!') != charSet.end())
         {
             std::cout << "<>" << std::endl;
             forward_list<Word> sorted_bucket;
@@ -318,7 +318,7 @@ void Dictionary::print_buckets_sorted_on_word_frequency(const set<char> &charSet
                 }
             }
         }
-        if (charSet.contains('!'))
+        if (charSet.find('!') != charSet.end())
         {
             std::cout << "<>" << std::endl;
             forward_list<Word> sorted_bucket;
@@ -386,7 +386,7 @@ void Dictionary::print_buckets_sorted_on_word_length(const set<char> &charSet) c
                 }
             }
         }
-        if (charSet.contains('!'))
+        if (charSet.find('!') != charSet.end())
         {
             std::cout << "<>" << std::endl;
             forward_list<Word> sorted_bucket;

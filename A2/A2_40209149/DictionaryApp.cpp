@@ -221,7 +221,7 @@ std::set<char> get_input_char_set()
     bool specials = false;
     for (char c : input)
     {
-        if (std::isalpha(c) && !result.contains(static_cast<char>(std::tolower(c))) && !result.contains(static_cast<char>(std::toupper(c))))
+        if (std::isalpha(c) && !(result.find(static_cast<char>(std::tolower(c)))!= result.end()) && !(result.find(static_cast<char>(std::toupper(c))) != result.end()))
         {
             result.insert(c);
         }
