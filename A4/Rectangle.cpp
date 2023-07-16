@@ -24,10 +24,13 @@ int Rectangle::perimeterScr() const {
 }
 
 Canvas Rectangle::draw() const {
-    Canvas can{ getHeight(), getWidth() };
-    for (int row = 0; row < getHeight(); ++row) {
-        for (int col = 0; col < getWidth(); ++col) {
-            can.put(row, col, getPen());
+    char p = getPen();
+    int h = getHeight();
+    int w = getWidth();
+    Canvas can{ h, w };
+    for (int row = 0; row < h; ++row) {
+        for (int col = 0; col < w; ++col) {
+            can.put(row, col, p);
         }
     }
     return can;

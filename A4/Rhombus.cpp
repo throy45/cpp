@@ -57,28 +57,31 @@ int Rhombus::perimeterScr() const {
 }
 
 Canvas Rhombus::draw() const {
-    Canvas can{ getHeight(), getWidth() };
-    int n = getHeight() / 2;
+    char p = getPen();
+    int h = getHeight();
+    int w = getWidth();
+    Canvas can{ h, w };
+    int n = h / 2;
     // top half
     for (int row = 0; row < n; ++row) {
         // col = n - row is the leftmost column
         // col = n + row is the rightmost column
         // col = n is the middle column
         for (int col = n - row; col <= n + row; ++col) {
-            can.put(row, col, getPen());
+            can.put(row, col, p);
         }
     }
     // middle row
-    for (int col = 0; col < getWidth(); ++col) {
-        can.put(n, col, getPen());
+    for (int col = 0; col < w; ++col) {
+        can.put(n, col, p);
     }
     // bottom half
-    for (int row = n + 1; row < getHeight(); ++row) {
+    for (int row = n + 1; row < h; ++row) {
         // col = row - n is the leftmost column
         // col = 3 * n - row is the rightmost column
         // col = n is the middle column
         for (int col = row - n; col <= 3 * n - row; ++col) {
-            can.put(row, col, getPen());
+            can.put(row, col, p);
         }
     }
     return can;

@@ -1,6 +1,8 @@
 #include<iostream>
 #include<vector>
+#include<memory>
 
+#include "Shape.h"
 #include "Rhombus.h"
 #include "Rectangle.h"
 #include "AcuteTriangle.h"
@@ -14,7 +16,7 @@ void drawHouse();      // draws front view of a house image
 
 int main()
 {
-   drawHouse();  
+   drawHouse();
 
    return 0;
 }
@@ -67,6 +69,7 @@ void drawHouse()
    houseCanvas.overlap(wall, 24, 44);
 
    shapeVec.back()->setPen(']'); // use the same wall shape
+   wall = shapeVec.back()->draw();
    houseCanvas.overlap(wall, 24, 9);
    houseCanvas.overlap(wall, 24, 45);
 

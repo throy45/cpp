@@ -7,7 +7,7 @@ class RightTriangle : public Triangle
 {
 public:
     RightTriangle() = delete;
-    RightTriangle(int b);
+    RightTriangle(int b, char p = '*', std::string n = "Ladder");
     virtual ~RightTriangle() = default;
 
     void setHeight(int h) override;
@@ -18,8 +18,5 @@ public:
 
     Canvas draw() const override;
 };
-
-
-}
 
 #endif

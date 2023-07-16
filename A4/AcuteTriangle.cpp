@@ -1,32 +1,44 @@
 #include "AcuteTriangle.h"
 #include <cmath>
 
-AcuteTriangle::AcuteTriangle(int b) : Triangle(b)
+AcuteTriangle::AcuteTriangle(int b, char p, std::string n) : Triangle(b, p, n)
 {
     if (b % 2 == 0)
-    {
-        throw std::invalid_argument("Base must be odd");
+    { // b is even, add 1
+        Shape::setHeight((b + 2) / 2);
+        Triangle::setWidth(b + 1);
+    }
+    else {
+        Shape::setHeight((b + 1) / 2);
+        Triangle::setWidth(b);
     }
 }
 
-void AcuteTriangle::setHeight(int b)
+void AcuteTriangle::setHeight(int h)
 {
-    if (b % 2 == 0)
-    {
-        throw std::invalid_argument("Base must be odd");
+    if ((2 * h - 1) % 2 == 0)
+    { // b is even, add 1
+        Shape::setHeight(h);
+        Triangle::setWidth(2 * h);
     }
-    Triangle::setHeight((b + 1) / 2);
-    Triangle::setWidth(b);
+    else {
+        Shape::setHeight(h);
+        Triangle::setWidth(2 * h - 1);
+
+    }
 }
 
 void AcuteTriangle::setWidth(int b)
 {
     if (b % 2 == 0)
-    {
-        throw std::invalid_argument("Base must be odd");
+    { // b is even, add 1
+        Shape::setHeight((b + 2) / 2);
+        Triangle::setWidth(b + 1);
     }
-    Triangle::setWidth(b);
-    Triangle::setHeight((b + 1) / 2);
+    else {
+        Shape::setHeight((b + 1) / 2);
+        Triangle::setWidth(b);
+    }
 }
 
 double AcuteTriangle::perimeterGeo() const
@@ -46,17 +58,20 @@ int AcuteTriangle::perimeterScr() const
 
 Canvas AcuteTriangle::draw() const
 {
-    Canvas can{ getHeight(), getBase() };
-    for (int i = 0; i < getHeight(); ++i)
+    char p = getPen();
+    int h = getHeight();
+    int w = getWidth();
+    Canvas can{ h, w };
+    for (int i = 0; i < h; ++i)
     { // i is the row
-        for (int j = 0; j < getBase(); ++j)
+        for (int j = 0; j < w; ++j)
         { // j is the column
             // If: j is greater than or equal to the height - i - 1
             // and j is less than or equal to the height + i - 1
             // Then: put a star
-            if (j >= getHeight() - i - 1 && j <= getHeight() + i - 1)
+            if (j >= h - i - 1 && j <= h + i - 1)
             {
-                can.put(i, j, '*');
+                can.put(i, j, p);
             }
         }
     }

@@ -1,6 +1,6 @@
 #include "Triangle.h"
 
-Triangle::Triangle(int b) : Shape(b, b) {
+Triangle::Triangle(int b, char p, std::string n) : Shape(b, b, p, n) {
 }
 
 void Triangle::setWidth(int w) {

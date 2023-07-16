@@ -1,12 +1,12 @@
 #include "RightTriangle.h"
 #include <cmath>
 
-RightTriangle::RightTriangle(int b) : Triangle(b)
+RightTriangle::RightTriangle(int b, char p, std::string n) : Triangle(b, p, n)
 {}
 
 void RightTriangle::setHeight(int h)
 {
-    Triangle::setHeight(h);
+    Shape::setHeight(h);
     Triangle::setWidth(h);
 }
 
@@ -27,14 +27,16 @@ int RightTriangle::perimeterScr() const
 
 Canvas RightTriangle::draw() const
 {
-    Canvas can{ getHeight(), getHeight() };
-    for (int i = 0; i < getHeight(); ++i)
+    char p = getPen();
+    int h = getHeight();
+    Canvas can{ h, h };
+    for (int i = 0; i < h; ++i)
     { // i is the row
-        for (int j = 0; j < getHeight(); ++j)
+        for (int j = 0; j < h; ++j)
         { // j is the column
             if (j <= i)
             {
-                can.put(i, j, '*');
+                can.put(i, j, p);
             }
         }
     }

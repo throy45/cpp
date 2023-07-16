@@ -1,5 +1,8 @@
 #include "Shape.h"
 
+
+int Shape::nextId = 0;
+
 Shape::Shape(int h, int w, char p, std::string n) : name(n), pen(p) {
     if (h <= 0 || w <= 0) {
         throw std::invalid_argument("Height and width must be positive");
