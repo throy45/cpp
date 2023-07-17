@@ -1,3 +1,7 @@
+// Assignment 4, Due 23/07/23
+// Thomas Roy 40209149
+// The following is supplied by the assignment:
+
 #include<iostream>
 #include<vector>
 #include<memory>

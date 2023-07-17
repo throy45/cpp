@@ -99,5 +99,6 @@
     "thread": "cpp",
     "cinttypes": "cpp"
   },
-  "docwriter.style": "Javadoc"
+  "docwriter.style": "Javadoc",
+  "docwriter.progress.trackFunctions": false
 }
