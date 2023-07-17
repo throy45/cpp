@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Zipped files
+*.zip
+*.7z
