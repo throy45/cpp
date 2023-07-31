@@ -41,7 +41,7 @@ std::istream& operator>>(std::istream& is, Mat2x2& m)
         while (!(is >> element)) {
             // Input is not a double, clear the error state and ignore the invalid input
             is.clear();
-            is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            is.ignore(std::numeric_limits <long long> ::max(), '\n'); // ignore everything until newline
             std::cout << "Invalid input. Please enter a valid double for element " << i << ": ";
         }
 

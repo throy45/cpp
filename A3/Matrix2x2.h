@@ -9,6 +9,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <iomanip>
+#include <limits>
 
 /**
  * The `class Mat2x2` is defining a matrix class for 2x2 matrices. It provides various member functions and overloaded
@@ -94,7 +95,7 @@ public:
 
     double operator()() const noexcept;
 
-    operator bool() const noexcept;
+    explicit operator bool() const noexcept;
 
     Mat2x2 operator+() noexcept;
     Mat2x2 operator-() noexcept;
