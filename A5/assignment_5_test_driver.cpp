@@ -1,5 +1,6 @@
 #include <cassert>
 #include <iostream>
+#include <iterator>
 using std::cout;
 using std::endl;
 using std::cin;
@@ -179,11 +180,11 @@ void task_8_test_driver(int n)
    cout << endl;
 }
 
- // Task 9
+// Task 9
 void task_9_test_driver(unsigned long n)
 {
    cout << "\nTask 9: Fibonacci generator" << endl;
-   FibGen fib{ n };
+   FibGen fib{ static_cast<int>(n) };
    for (FibGen iter = fib.begin(); iter != fib.end(); ++iter)
    {
       cout << *iter << ' ';

@@ -101,7 +101,8 @@
     "__tree": "cpp",
     "map": "cpp",
     "codecvt": "cpp",
-    "stack": "cpp"
+    "stack": "cpp",
+    "xhash": "cpp"
   },
   "docwriter.style": "Javadoc",
   "docwriter.progress.trackFunctions": false
