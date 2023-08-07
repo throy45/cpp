@@ -1,3 +1,8 @@
+/**
+ * COMP 5421 Advanced C++ Programming
+ * Assignment 5 - Due August 13th, 2023
+ * Thomas Roy - 40291949
+**/
 #ifndef ASSIGNMENT5_H_
 #define ASSIGNMENT5_H_
 
